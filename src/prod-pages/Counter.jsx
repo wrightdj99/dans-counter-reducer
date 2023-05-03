@@ -34,8 +34,6 @@ const reducer = (state, action) => {
 }
 
 function Counter({initialCount}) {
-    //const [count, changeCount] = useState(initialCount);
-    //const [valueToAdd, setValueToAdd] = useState(0);
     const [state, dispatch] = useReducer(reducer, {
         count: initialCount,
         valueToAdd: 0
