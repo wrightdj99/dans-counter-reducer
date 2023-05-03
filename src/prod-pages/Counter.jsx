@@ -2,8 +2,6 @@ import { useReducer } from "react";
 
 const reducer = (state, action) => {
     switch(action.type){
-        default:
-            return state;
         case 'increment':
             return{
                 ...state,
@@ -30,6 +28,8 @@ const reducer = (state, action) => {
                 ...state,
                 count: state.count + action.payload
             };
+        default:
+            return state;
     }
 }
 
