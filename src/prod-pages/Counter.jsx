@@ -1,43 +1,36 @@
 import { useReducer } from "react";
 
 const reducer = (state, action) => {
-    if(action.type === 'increment'){
-        return{
-            ...state,
-            count: state.count + 1
-        };
+    switch(action.type){
+        default:
+            return state;
+        case 'increment':
+            return{
+                ...state,
+                count: state.count + 1
+            };
+        case 'decrement':
+            return{
+                ...state,
+                count: state.count - 1
+            };
+        case 'reset':
+            return{
+                ...state,
+                count: 0,
+                valueToAdd: 0
+            };
+        case 'change-value-to-add':
+            return{
+                ...state,
+                valueToAdd: action.payload
+            };
+        case 'alter-adding-num':
+            return{
+                ...state,
+                count: state.count + action.payload
+            };
     }
-
-    if(action.type === 'decrement'){
-        return{
-            ...state,
-            count: state.count - 1
-        };
-    }
-
-    if(action.type === 'reset'){
-        return{
-            ...state,
-            count: 0,
-            valueToAdd: 0
-        };
-    }
-
-    if(action.type === 'change-value-to-add'){
-        return{
-            ...state,
-            valueToAdd: action.payload
-        };
-    }
-
-    if(action.type === 'alter-adding-num'){
-        return{
-            ...state,
-            count: state.count + action.payload
-        };
-    }
-
-    return state;
 }
 
 function Counter({initialCount}) {
