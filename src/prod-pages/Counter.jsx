@@ -18,7 +18,8 @@ const reducer = (state, action) => {
     if(action.type === 'reset'){
         return{
             ...state,
-            count: 0
+            count: 0,
+            valueToAdd: 0
         };
     }
 
@@ -26,6 +27,13 @@ const reducer = (state, action) => {
         return{
             ...state,
             valueToAdd: action.payload
+        };
+    }
+
+    if(action.type === 'alter-adding-num'){
+        return{
+            ...state,
+            count: state.count + action.payload
         };
     }
 
@@ -61,8 +69,12 @@ function Counter({initialCount}) {
     }
 
     const handleSubmit = (event) => {
+        const value = state.valueToAdd;
         event.preventDefault();
-        //changeCount(count + valueToAdd);
+        dispatch({
+            type: 'alter-adding-num',
+            payload: value
+        });
     }
 
     const reset = () => {
@@ -80,7 +92,7 @@ function Counter({initialCount}) {
             <form onSubmit={handleSubmit} className="App">
                 <h2>Add a lot!</h2><br/>
                 <input type="number" value={state.valueToAdd || ""} onChange={handleChange} className="inputClass"></input><br/><br/>
-                <button className="buttonClass">Add it!</button>
+                <button className="buttonClass" onClick={handleSubmit}>Add it!</button>
                 <button className="buttonClass" onClick={reset}>Reset</button>
 
             </form>
