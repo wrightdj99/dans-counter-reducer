@@ -1,10 +1,35 @@
 import { useReducer } from "react";
 
 const reducer = (state, action) => {
-    return {
-        ...state,
-        count: state.count+1
+    if(action.type === 'increment'){
+        return{
+            ...state,
+            count: state.count + 1
+        };
     }
+
+    if(action.type === 'decrement'){
+        return{
+            ...state,
+            count: state.count - 1
+        };
+    }
+
+    if(action.type === 'reset'){
+        return{
+            ...state,
+            count: 0
+        };
+    }
+
+    if(action.type === 'change-value-to-add'){
+        return{
+            ...state,
+            valueToAdd: action.payload
+        };
+    }
+
+    return state;
 }
 
 function Counter({initialCount}) {
@@ -15,16 +40,24 @@ function Counter({initialCount}) {
         valueToAdd: 0
     })
     const incrementCount = () => {
-       dispatch();
+       dispatch({
+            type: 'increment',
+
+       });
     }
 
     const decrementCount = () => {
-        //changeCount(count - 1);
+        dispatch({
+            type: 'decrement',
+        });
     }
 
     const handleChange = (event) => {
         const value = parseInt(event.target.value) || 0;
-        //setValueToAdd(value);
+        dispatch({
+            type: 'change-value-to-add',
+            payload: value
+        });
     }
 
     const handleSubmit = (event) => {
@@ -33,7 +66,9 @@ function Counter({initialCount}) {
     }
 
     const reset = () => {
-        
+        dispatch({
+            type: 'reset'
+        });
     }
 
     return(
