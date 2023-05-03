@@ -7,7 +7,7 @@ function App() {
       <h1>Redux Counter</h1>
       <hr/>
       <Routes>
-          <Route path='/' element={<Counter/>}/>
+          <Route path='/' element={<Counter initialCount={0}/>}/>
       </Routes>
     </div>
   );
